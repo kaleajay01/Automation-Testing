@@ -42,15 +42,17 @@ class LoginPage(BasePage):
         self.fill(self.password_input, password)
 
     def select_role(self, role):
-
         self.role_dropdown.click()
 
-        self.page.get_by_role(
+        role_option = self.page.get_by_role(
             "option",
             name=role,
             exact=True
-        ).click()
+        )
 
+        role_option.wait_for(state="visible", timeout=15000)
+        role_option.click()
+        
     def click_login(self):
 
         self.click(self.login_button)
