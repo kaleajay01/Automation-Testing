@@ -1,10 +1,7 @@
-
 from pathlib import Path
 from playwright.sync_api import Page, Locator
 
-
 class BasePage:
-
     def __init__(self, page: Page):
         self.page = page
 
@@ -22,16 +19,6 @@ class BasePage:
 
     def is_visible(self, locator: Locator):
         return locator.is_visible()
-
-    def take_screenshot(self, filename: str):
-
-        screenshot_dir = Path("screenshots")
-        screenshot_dir.mkdir(parents=True, exist_ok=True)
-
-        self.page.screenshot(
-            path=str(screenshot_dir / filename),
-            full_page=True
-        )
 
     def get_current_url(self):
         return self.page.url
