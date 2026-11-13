@@ -11,7 +11,5 @@ def test_successful_signin(page):
     page.get_by_role("option",name="Student",exact=True).click()
     page.locator("#password").fill("12345")
     page.get_by_role("button",name="Login",exact=True).click()
-
     expect(page).to_have_url("http://localhost:8081/models/membership/dashboard",timeout=20000)
-
     print("Login successful! Dashboard opened.")
