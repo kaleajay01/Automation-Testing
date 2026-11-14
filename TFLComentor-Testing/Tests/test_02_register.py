@@ -1,0 +1,15 @@
+from playwright.sync_api import expect
+def test_successful_registration(shared_page):
+    shared_page.get_by_role("link", name="Sign In").click()
+    expect(shared_page).to_have_url("http://localhost:8081/models/membership/Login")
+    shared_page.get_by_role("button", name="Register Now").click()
+    expect(shared_page).to_have_url("http://localhost:8081/models/membership/Register")
+    expect(shared_page.get_by_text("Register", exact=True).first).to_be_visible()
+    shared_page.locator("#firstName").fill("Ajay")
+    shared_page.locator("#lastName").fill("Test")
+    shared_page.locator("#email").fill("ajay.test2026@example.com")
+    shared_page.locator("#contact").fill("9876543210")
+    shared_page.get_by_role("button",name="Register",exact=True).click()
+    expect(shared_page.get_by_text("Registration successful")).to_be_visible(timeout=15000)
+    expect(shared_page).to_have_url("http://localhost:8081/models/membership/Register",timeout=20000)
+    print("Registration completed successfully!")
