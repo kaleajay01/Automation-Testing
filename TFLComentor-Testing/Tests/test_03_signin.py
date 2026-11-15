@@ -7,7 +7,7 @@ def test_successful_signin(shared_page):
     role_dropdown = shared_page.get_by_role("combobox")
     role_dropdown.click()
 
-    shared_page.get_by_role("option",name="Student",exact=True).click()
+    shared_page.get_by_role("option",name="SME",exact=True).click()
     shared_page.locator("#password").fill("12345")
     shared_page.get_by_role("button",name="Login",exact=True).click()
     expect(shared_page).to_have_url("http://localhost:8081/models/membership/dashboard",timeout=20000)
