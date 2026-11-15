@@ -6,7 +6,6 @@ def test_tests_created_navigation(shared_page):
     expect(tests_created_box).to_be_visible()
     tests_created_box.click()
     print("Tests Created box clicked")
-    # shared_page.wait_for_url(lambda url: str(url) != current_url,timeout=10000)
     
 def test_test_create_button(shared_page):
     shared_page.get_by_role("button", name="+ Create Test").click()
@@ -43,11 +42,9 @@ def test_select_type_level_status(shared_page):
     checkboxes = shared_page.locator('input[type="checkbox"]')
     expect(checkboxes.first).to_be_visible(timeout=20000)
     question_count = checkboxes.count()
-    
     for i in range(question_count):
         checkboxes.nth(i).check()
     print(f"{question_count} questions selected successfully")
-
     create_button = shared_page.get_by_role("button", name="Create Test", exact=True)
     expect(create_button).to_be_enabled()
     print("Create Test button is enabled")
