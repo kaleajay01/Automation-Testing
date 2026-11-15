@@ -30,11 +30,26 @@ def test_select_type_level_status(shared_page):
     dropdowns.nth(0).click()
     shared_page.get_by_role("option", name="MCQ").click()
     dropdowns.nth(1).click()
-    shared_page.get_by_role("option", name="Beginner").click()
+    shared_page.get_by_role("option", name="INTERMEDIATE").click()
     dropdowns.nth(2).click()
     shared_page.get_by_role("option", name="Approved").click()
     
     expect(shared_page.get_by_role("button", name="Select Questions")).to_be_visible()
-    print("All selections completed successfully")
+    print("Question filters selected successfully")    
     
+    shared_page.get_by_role("button", name="Select Questions").click()
+    print("Select Questions button clicked")
     
+    checkboxes = shared_page.locator('input[type="checkbox"]')
+    expect(checkboxes.first).to_be_visible(timeout=20000)
+    question_count = checkboxes.count()
+    
+    for i in range(question_count):
+        checkboxes.nth(i).check()
+    print(f"{question_count} questions selected successfully")
+
+    create_button = shared_page.get_by_role("button", name="Create Test", exact=True)
+    expect(create_button).to_be_enabled()
+    print("Create Test button is enabled")
+    shared_page.get_by_role("button", name="Create Test").click()
+    print("test created successfully")
